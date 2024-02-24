@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+# Script Name: 67-stop_me_if_you_can
+# Description: Stops the 7-highlander process without using kill or killall
+
+pid=$(pgrep -fo "7-highlander")
+if [ -n "$pid" ]; then
+    echo "Stopping process: $pid"
+    kill "$pid"
+else
+    echo "Process not found"
+fi
