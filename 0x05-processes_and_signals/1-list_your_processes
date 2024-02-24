@@ -2,4 +2,4 @@
 # Script Name: 1-list_your_processes
 # Description: Displays a list of currently running processes with hierarchy
 
-ps axo user,pid,%cpu,%mem,vsz,rss,tty,stat,start,time,command --forest | head -n 50
+ps auxf
