@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# Script Name: 5-dont_stop_me_now
+# Description: Stops the 4-to_infinity_and_beyond process
+
+pkill -f "4-to_infinity_and_beyond"

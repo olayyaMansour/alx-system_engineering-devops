@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+# Script Name: 3-show_your_bash_pid_made_easy
+# Description: Displays the PID and process name of processes containing the word "bash"
+
+# shellcheck disable=SC2009
+pgrep -fl bash
