@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
-# Script Name: 4-to_infinity_and_beyond
 # Description: Displays "To infinity and beyond" indefinitely with a
-# sleep of 2 seconds between iterations
+#+ a sleep of 2 seconds between iterations
 
 while true
 do
