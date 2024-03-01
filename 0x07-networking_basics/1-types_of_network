@@ -1,14 +1,3 @@
-#!/usr/bin/env bash
-# This script contains corrected answers to questions related to types of networks.
-
-# Question 1: What type of network a computer in local is connected to?
-# Answer: LAN
 3
-
-# Question 2: What type of network could connect an office in one building to another office in a building a few streets away?
-# Answer: WAN
 2
-
-# Question 3: What network do you use when you browse www.google.com from your smartphone (not connected to the Wifi)?
-# Answer: Internet
 1

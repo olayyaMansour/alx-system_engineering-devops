@@ -1,4 +1,1 @@
-#!/usr/bin/env bash
-# This script displays listening ports with PID and program name.
-
 sudo netstat -tulpn
