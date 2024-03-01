@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# This script listens on port 98 on localhost.
+
+# Create a simple TCP server using netcat
+nc -l localhost 98
