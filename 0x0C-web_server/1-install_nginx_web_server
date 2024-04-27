@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+# Bash script to install and configure Nginx web server
+
+# Update package list and install Nginx
+apt-get update -y
+apt-get install -y nginx
+
+# Configure Nginx to listen on port 80 and serve "Hello World!" page
+echo "Hello World!" > /usr/share/nginx/html/index.html
+
+# Restart Nginx without using systemctl
+/usr/sbin/nginx -s reload
