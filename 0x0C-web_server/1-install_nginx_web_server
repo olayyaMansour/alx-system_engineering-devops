@@ -1,15 +1,35 @@
 #!/usr/bin/env bash
-# Installs Nginx web server
+# Installs Nginx web server and configures it to serve "Hello World!"
 
+# Update package lists and install Nginx
 apt-get update
 apt-get install -y nginx
 
-# Create a sample HTML file
+# Create a sample HTML file with "Hello World!" content
 echo "<html><body>Hello World!</body></html>" > /var/www/html/index.html
 
-# Restart Nginx (without using systemctl)
+# Configure Nginx to listen on port 80 and serve the sample HTML file
+cat > /etc/nginx/sites-available/default <<EOF
+server {
+    listen 80 default_server;
+    listen [::]:80 default_server;
+    root /var/www/html;
+    index index.html index.htm index.nginx-debian.html;
+    server_name _;
+    location / {
+        try_files \$uri \$uri/ =404;
+    }
+}
+EOF
+
+# Restart Nginx to apply changes
 killall nginx  # Stop Nginx if it's running
 nginx          # Start Nginx
 
-# Optional: Check Nginx status and test the page
-curl localhost  # Check if "Hello World!" is displayed
+# Test if Nginx serves "Hello World!" correctly
+response=$(curl -s http://localhost)
+if [[ "$response" == *"Hello World!"* ]]; then
+    echo "Nginx is serving Hello World!"
+else
+    echo "Nginx is not serving Hello World!"
+fi
