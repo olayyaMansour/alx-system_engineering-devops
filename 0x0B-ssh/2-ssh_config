@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+# establishing the clinet config
+Host your_server_ip_or_hostname
+    IdentityFile ~/.ssh/school
+    PasswordAuthentication no
+
