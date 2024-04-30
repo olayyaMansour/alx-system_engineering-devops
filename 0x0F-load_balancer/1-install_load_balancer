@@ -40,8 +40,8 @@ frontend olayyamansour-tech-frontend
 
 backend olayyamansour-tech-backend
     balance roundrobin
-    server 531271-web-01 54.160.102.163 check
-    server 531271-web-02 100.25.31.97 check
+    server 531271-web-01 54.160.102.163:80 check
+    server 531271-web-02 100.25.31.97:80 check
 "
 
 # shellcheck disable=SC2154
