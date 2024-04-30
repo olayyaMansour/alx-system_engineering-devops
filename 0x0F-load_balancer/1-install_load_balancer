@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# installing the load balancer
+# installing the load balancer here
 
 
 echo -e "Updating and doing some minor checks...\n"
