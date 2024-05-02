@@ -17,7 +17,8 @@ fi
 if ! sudo netstat -tuln | grep -q ':80 '; then
     echo "Configuring Nginx to listen on port 80..."
     # Modify Nginx configuration to listen on port 80 of all active IPv4 IPs
-    sudo sed -i 's/\blisten 80;/listen 80 default_server;/g' /etc/nginx/sites-available/default
+    sudo sed -i 's/\blisten 80;/listen 80 default_server;/g'
+    /etc/nginx/sites-available/default
     sudo systemctl restart nginx
     echo "Nginx now listens on port 80."
 else
