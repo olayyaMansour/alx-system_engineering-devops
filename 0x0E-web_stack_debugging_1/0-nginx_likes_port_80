@@ -1,40 +1,25 @@
-#!/bin/bash
+#!/usr/bin/env bash
+# Script to configure Nginx to listen on port 80
 
-# config files check
-if ! grep -q "listen 80 default_server;"
-/etc/nginx/sites-enabled/default;
-then
-    echo "Error: 'listen 80 default_server;'
-is missing or misconfigured in /etc/nginx/sites-enabled/default"
-# sec check
-    echo "Updating the configuration to bind port 80 to all IPv4 addresses..."
-    awk '/^server {/,/^listen \[::\]:80 default_server;/
-{ if ($0 ~ /^ *listen [[:digit:]]+ default_server;/)
-print "        listen 80 default_server;";
-else print; next } 1' /etc/nginx/sites-enabled/default > /tmp/default.tmp && sudo mv /tmp/default.tmp /etc/nginx/sites-enabled/default
+# Check if Nginx is installed
+if ! command -v nginx &> /dev/null; then
+    echo "Nginx is not installed. Please install it first."
+    exit 1
 fi
 
-# last check
-if sudo netstat -tuln | grep -q ":80";
-then
-    echo "Error: Another web server like Apache is active and using port 80"
-    # Stop the Apache service
-    echo "Stopping Apache service..."
-    sudo systemctl stop apache2
+# Check Nginx status
+if ! pgrep nginx &> /dev/null; then
+    echo "Nginx is not running. Starting Nginx..."
+    sudo systemctl start nginx
 fi
 
-# Check Nginx
-if ! sudo nginx -t -c /etc/nginx/nginx.conf &> /dev/null; then
-    echo "Error: Nginx is not run with sudo privileges"
-    # Restart Nginx with sudo privileges
-    echo "Restarting Nginx with sudo privileges..."
+# Check if Nginx is listening on port 80
+if ! sudo netstat -tuln | grep -q ':80 '; then
+    echo "Configuring Nginx to listen on port 80..."
+    # Modify Nginx configuration to listen on port 80 of all active IPv4 IPs
+    sudo sed -i 's/\blisten 80;/listen 80 default_server;/g' /etc/nginx/sites-available/default
     sudo systemctl restart nginx
-fi
-
-# Check i4
-if sudo ufw status | grep -q "80/tcp"; then
-    echo "Error: UFW firewall configuration is restricting Nginx from binding to port 80"
-    # Allow incoming traffic on port 80
-    echo "Allowing incoming traffic on port 80..."
-    sudo ufw allow 80/tcp
+    echo "Nginx now listens on port 80."
+else
+    echo "Nginx is already listening on port 80."
 fi
