@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Start nginx
+# Start nginx task 1
 service nginx start
 sed -i 's/\blisten 80;/listen 80 default_server;/g' /etc/nginx/sites-available/default
 service nginx restart
